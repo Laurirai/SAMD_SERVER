@@ -9,6 +9,11 @@ class Analyzer:
         self.temperature_history = deque(maxlen=window_size)
         self.spo2_history = deque(maxlen=window_size)
         self.hr_history = deque(maxlen=window_size)
+        
+        self.added_temp = 0
+        self.added_spo2 = 0
+        self.added_hr = 0
+
 
         # Detected events during the test
         self.events = []
@@ -30,11 +35,17 @@ class Analyzer:
         self.spo2_history.append(data["spo2"])
         self.hr_history.append(data["hr"])
 
-        # We don't have enough data for a window yet
         if len(self.temperature_history) < self.window_size:
             return None
 
-        # Analysis will go here later
+        avg_temp = sum(self.temperature_history) / len(self.temperature_history)
+
+        print(f"Average Temp: {avg_temp}")
+
+        temp_range = max(self.temperature_history) - min(self.temperature_history)
+
+        print(f"Temperature range: {temp_range:.2f} C")
+
         return None
 
     def get_events(self):
