@@ -91,6 +91,7 @@
             margin-top: 5px;
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -104,9 +105,10 @@
     <section class="card">
         <h2>Overall Session</h2>
 
-        <div class="main-graph">
-            Overall session graph will go here
+        <div style="height: 400px; position: relative;">
+        <canvas id="overallChart"></canvas>
         </div>
+        <p id="chartStatus">Loading test session...</p>
     </section>
 
 
@@ -175,5 +177,252 @@
 
 </main>
 
+<script>
+async function loadSession() {
+    const status = document.getElementById("chartStatus");
+
+    try {
+        const response = await fetch("/api/test-data");
+
+        if (!response.ok) {
+            throw new Error("Could not load test data");
+        }
+
+        const readings = await response.json();
+
+        if (readings.length === 0) {
+            status.textContent = "No test data available.";
+            return;
+        }
+
+        // --------------------------------------------------
+        // Keep track of the last valid sensor values
+        // --------------------------------------------------
+
+        let lastHR = null;
+        let lastSpO2 = null;
+        let lastTemp = null;
+
+        // These are the points currently visible on the graph
+        const points = [];
+
+        // --------------------------------------------------
+        // Create the chart
+        // --------------------------------------------------
+
+        const chart = new Chart(
+            document.getElementById("overallChart"),
+            {
+                type: "line",
+
+                data: {
+                    datasets: [{
+                        label: "Overall Status",
+                        data: points,
+                        parsing: false,
+
+                        borderWidth: 2.5,
+                        pointRadius: 0,
+                        fill: true,
+                        tension: 0.2
+                    }]
+                },
+
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+
+                    animation: false,
+
+                    interaction: {
+                        intersect: false,
+                        mode: "index"
+                    },
+
+                    scales: {
+                        x: {
+                            type: "linear",
+
+                            min: 0,
+                            max: 30,
+
+                            title: {
+                                display: true,
+                                text: "Time (seconds)"
+                            }
+                        },
+
+                        y: {
+                            min: 0,
+                            max: 100,
+
+                            title: {
+                                display: true,
+                                text: "Status (%)"
+                            },
+
+                            ticks: {
+                                callback: value => value + "%"
+                            }
+                        }
+                    }
+                }
+            }
+        );
+
+        // --------------------------------------------------
+        // Process one reading
+        // --------------------------------------------------
+
+        function processReading(reading) {
+
+            // Ignore None / 0 / invalid values
+            if (
+                Number.isFinite(reading.hr) &&
+                reading.hr > 0
+            ) {
+                lastHR = reading.hr;
+            }
+
+            if (
+                Number.isFinite(reading.spo2) &&
+                reading.spo2 > 0 &&
+                reading.spo2 <= 100
+            ) {
+                lastSpO2 = reading.spo2;
+            }
+
+            if (
+                Number.isFinite(reading.temp) &&
+                reading.temp > 0
+            ) {
+                lastTemp = reading.temp;
+            }
+
+            // We need all three signals before creating
+            // the overall status value.
+            if (
+                lastHR === null ||
+                lastSpO2 === null ||
+                lastTemp === null
+            ) {
+                return;
+            }
+
+            // --------------------------------------------------
+            // Temporary demo scoring
+            // --------------------------------------------------
+
+            const spo2Score = Math.max(
+                0,
+                Math.min(100, (lastSpO2 - 80) * 5)
+            );
+
+            const hrScore = Math.max(
+                0,
+                100 - Math.abs(lastHR - 72) * 2
+            );
+
+            // Look at the previous 10 seconds of temperature
+            const recent = readings.filter(
+                r =>
+                    r.timestamp <= reading.timestamp &&
+                    r.timestamp >= reading.timestamp - 9 &&
+                    Number.isFinite(r.temp) &&
+                    r.temp > 0
+            );
+
+            const tempRange = recent.length
+                ? Math.max(...recent.map(r => r.temp)) -
+                  Math.min(...recent.map(r => r.temp))
+                : 0;
+
+            const tempScore = Math.min(
+                100,
+                tempRange * 50
+            );
+
+            const score =
+                0.5 * spo2Score +
+                0.25 * hrScore +
+                0.25 * tempScore;
+
+            points.push({
+                x: reading.timestamp,
+                y: Math.round(score * 10) / 10
+            });
+        }
+
+        // --------------------------------------------------
+        // Update the X axis
+        // --------------------------------------------------
+
+        function updateXAxis(timestamp) {
+
+            // Expand in 30-second increments.
+            //
+            // 0-30
+            // 0-60
+            // 0-90
+            // 0-120
+            // etc.
+
+            const newMax =
+                Math.max(
+                    30,
+                    Math.ceil((timestamp + 1) / 30) * 30
+                );
+
+            chart.options.scales.x.max = newMax;
+
+            chart.update("none");
+        }
+
+        // --------------------------------------------------
+        // Play the test session
+        // --------------------------------------------------
+
+        let index = 0;
+
+        function showNextReading() {
+
+            if (index >= readings.length) {
+                status.textContent =
+                    `Session complete — ${readings.length} samples processed.`;
+
+                return;
+            }
+
+            const reading = readings[index];
+
+            processReading(reading);
+
+            // Update graph
+            chart.data.datasets[0].data = points;
+
+            updateXAxis(reading.timestamp);
+
+            status.textContent =
+                `Live session: ${reading.timestamp} seconds`;
+
+            index++;
+
+            // One simulated sensor reading per second
+            setTimeout(showNextReading, 1000);
+        }
+
+        // Start the simulated session
+        showNextReading();
+
+    } catch (error) {
+        console.error(error);
+
+        status.textContent =
+            "Could not load the graph. Check the server terminal.";
+    }
+}
+
+loadSession();
+</script>
 </body>
 </html>

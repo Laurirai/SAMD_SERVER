@@ -1,0 +1,1262 @@
+[
+    {
+        "timestamp": 0,
+        "hr": 74,
+        "spo2": 99,
+        "temp": 30.33,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 1,
+        "hr": 71,
+        "spo2": 98,
+        "temp": 30.31,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 2,
+        "hr": 69,
+        "spo2": 98,
+        "temp": 31.16,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 3,
+        "hr": 70,
+        "spo2": 97,
+        "temp": 29.97,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 4,
+        "hr": 70,
+        "spo2": 98,
+        "temp": 30.39,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 5,
+        "hr": 72,
+        "spo2": 99,
+        "temp": 31.29,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 6,
+        "hr": 69,
+        "spo2": 98,
+        "temp": 30.04,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 7,
+        "hr": 73,
+        "spo2": 98,
+        "temp": 30.78,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 8,
+        "hr": 74,
+        "spo2": 98,
+        "temp": 31.24,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 9,
+        "hr": 72,
+        "spo2": 98,
+        "temp": 30.47,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 10,
+        "hr": 71,
+        "spo2": 99,
+        "temp": 29.97,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 11,
+        "hr": 75,
+        "spo2": 97,
+        "temp": 31.12,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 12,
+        "hr": 74,
+        "spo2": 98,
+        "temp": 30.53,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 13,
+        "hr": 75,
+        "spo2": 97,
+        "temp": 30.58,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 14,
+        "hr": 73,
+        "spo2": 99,
+        "temp": 29.96,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 15,
+        "hr": 70,
+        "spo2": 97,
+        "temp": 30.92,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 16,
+        "hr": 74,
+        "spo2": 98,
+        "temp": 30.31,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 17,
+        "hr": 72,
+        "spo2": 97,
+        "temp": 31.05,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 18,
+        "hr": 71,
+        "spo2": 98,
+        "temp": 30.92,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 19,
+        "hr": 70,
+        "spo2": 97,
+        "temp": 30.44,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 20,
+        "hr": 71,
+        "spo2": 97,
+        "temp": 30.58,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 21,
+        "hr": 69,
+        "spo2": 98,
+        "temp": 29.76,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 22,
+        "hr": 72,
+        "spo2": 98,
+        "temp": 30.55,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 23,
+        "hr": 70,
+        "spo2": 99,
+        "temp": 30.67,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 24,
+        "hr": 71,
+        "spo2": 97,
+        "temp": 31.02,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 25,
+        "hr": 70,
+        "spo2": 99,
+        "temp": 29.85,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 26,
+        "hr": 73,
+        "spo2": 98,
+        "temp": 29.96,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 27,
+        "hr": 71,
+        "spo2": 98,
+        "temp": 29.83,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 28,
+        "hr": 75,
+        "spo2": 99,
+        "temp": 29.8,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 29,
+        "hr": 73,
+        "spo2": 98,
+        "temp": 30.96,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 30,
+        "hr": 73,
+        "spo2": 97,
+        "temp": 30.06,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 31,
+        "hr": 71,
+        "spo2": 98,
+        "temp": 30.58,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 32,
+        "hr": 72,
+        "spo2": 97,
+        "temp": 30.39,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 33,
+        "hr": 73,
+        "spo2": 97,
+        "temp": 30.34,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 34,
+        "hr": 74,
+        "spo2": 99,
+        "temp": 30.95,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 35,
+        "hr": 72,
+        "spo2": 98,
+        "temp": 30.41,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 36,
+        "hr": 70,
+        "spo2": 97,
+        "temp": 30.59,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 37,
+        "hr": 71,
+        "spo2": 99,
+        "temp": 30.95,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 38,
+        "hr": 69,
+        "spo2": 99,
+        "temp": 30.03,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 39,
+        "hr": 73,
+        "spo2": 97,
+        "temp": 29.7,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 40,
+        "hr": 73,
+        "spo2": 98,
+        "temp": 29.9,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 41,
+        "hr": 72,
+        "spo2": 98,
+        "temp": 30.27,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 42,
+        "hr": 72,
+        "spo2": 98,
+        "temp": 31.24,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 43,
+        "hr": 75,
+        "spo2": 98,
+        "temp": 30.81,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 44,
+        "hr": 73,
+        "spo2": 98,
+        "temp": 30.7,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 45,
+        "hr": 71,
+        "spo2": 99,
+        "temp": 30.3,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 46,
+        "hr": 70,
+        "spo2": 98,
+        "temp": 30.61,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 47,
+        "hr": null,
+        "spo2": 98,
+        "temp": 29.75,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 48,
+        "hr": 72,
+        "spo2": 97,
+        "temp": 30.31,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 49,
+        "hr": 70,
+        "spo2": 97,
+        "temp": 30.18,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 50,
+        "hr": 73,
+        "spo2": 99,
+        "temp": 31.29,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 51,
+        "hr": 70,
+        "spo2": 98,
+        "temp": 30.99,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 52,
+        "hr": 71,
+        "spo2": 98,
+        "temp": 30.11,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 53,
+        "hr": 73,
+        "spo2": 99,
+        "temp": 30.88,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 54,
+        "hr": 70,
+        "spo2": 98,
+        "temp": 30.23,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 55,
+        "hr": 72,
+        "spo2": 98,
+        "temp": 30.06,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 56,
+        "hr": 70,
+        "spo2": 98,
+        "temp": 30.4,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 57,
+        "hr": 74,
+        "spo2": 98,
+        "temp": 30.49,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 58,
+        "hr": 72,
+        "spo2": 98,
+        "temp": 31.26,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 59,
+        "hr": 74,
+        "spo2": 98,
+        "temp": 30.48,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 60,
+        "hr": 69,
+        "spo2": 99,
+        "temp": 29.8,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 61,
+        "hr": 69,
+        "spo2": 97,
+        "temp": 30.6,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 62,
+        "hr": 74,
+        "spo2": 98,
+        "temp": 30.98,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 63,
+        "hr": 70,
+        "spo2": 98,
+        "temp": 30.18,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 64,
+        "hr": 70,
+        "spo2": 97,
+        "temp": 29.98,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 65,
+        "hr": 69,
+        "spo2": 98,
+        "temp": 29.8,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 66,
+        "hr": 72,
+        "spo2": 98,
+        "temp": 31.1,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 67,
+        "hr": 73,
+        "spo2": 98,
+        "temp": 31.11,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 68,
+        "hr": 72,
+        "spo2": 98,
+        "temp": 30.78,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 69,
+        "hr": 74,
+        "spo2": 98,
+        "temp": 30.78,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 70,
+        "hr": 72,
+        "spo2": 98,
+        "temp": 30.73,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 71,
+        "hr": 72,
+        "spo2": 98,
+        "temp": 31.11,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 72,
+        "hr": 75,
+        "spo2": 98,
+        "temp": 30.82,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 73,
+        "hr": 74,
+        "spo2": 97,
+        "temp": 29.78,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 74,
+        "hr": 75,
+        "spo2": 97,
+        "temp": 31.13,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 75,
+        "hr": 71,
+        "spo2": 97,
+        "temp": 30.63,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 76,
+        "hr": 72,
+        "spo2": 98,
+        "temp": 30.57,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 77,
+        "hr": 69,
+        "spo2": 97,
+        "temp": 31.08,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 78,
+        "hr": 75,
+        "spo2": 98,
+        "temp": 30.43,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 79,
+        "hr": 71,
+        "spo2": 98,
+        "temp": 29.97,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 80,
+        "hr": 74,
+        "spo2": 98,
+        "temp": 31.24,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 81,
+        "hr": 74,
+        "spo2": 97,
+        "temp": 31.01,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 82,
+        "hr": 73,
+        "spo2": 98,
+        "temp": 29.99,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 83,
+        "hr": 73,
+        "spo2": 0,
+        "temp": 31.23,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 84,
+        "hr": 73,
+        "spo2": 98,
+        "temp": 30.48,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 85,
+        "hr": 72,
+        "spo2": 98,
+        "temp": 29.95,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 86,
+        "hr": 75,
+        "spo2": 99,
+        "temp": 30.48,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 87,
+        "hr": 74,
+        "spo2": 98,
+        "temp": 29.79,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 88,
+        "hr": 73,
+        "spo2": 98,
+        "temp": 31.13,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 89,
+        "hr": 74,
+        "spo2": 98,
+        "temp": 30.23,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 90,
+        "hr": 74,
+        "spo2": 98,
+        "temp": 30.22,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 91,
+        "hr": 73,
+        "spo2": 98,
+        "temp": 30.76,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 92,
+        "hr": 71,
+        "spo2": 99,
+        "temp": 30.35,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 93,
+        "hr": 73,
+        "spo2": 98,
+        "temp": 31.21,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 94,
+        "hr": 73,
+        "spo2": 98,
+        "temp": 29.94,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 95,
+        "hr": 74,
+        "spo2": 98,
+        "temp": 31.14,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 96,
+        "hr": 70,
+        "spo2": 98,
+        "temp": 29.82,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 97,
+        "hr": 71,
+        "spo2": 98,
+        "temp": 29.78,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 98,
+        "hr": 73,
+        "spo2": 99,
+        "temp": 30.04,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 99,
+        "hr": 73,
+        "spo2": 97,
+        "temp": 29.74,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 100,
+        "hr": 74,
+        "spo2": 98,
+        "temp": 30.62,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 101,
+        "hr": 70,
+        "spo2": 98,
+        "temp": 30.59,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 102,
+        "hr": 74,
+        "spo2": 97,
+        "temp": 30.63,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 103,
+        "hr": 73,
+        "spo2": 98,
+        "temp": 30.55,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 104,
+        "hr": 70,
+        "spo2": 98,
+        "temp": 30.64,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 105,
+        "hr": 73,
+        "spo2": 98,
+        "temp": 30.41,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 106,
+        "hr": 75,
+        "spo2": 98,
+        "temp": 30.6,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 107,
+        "hr": 73,
+        "spo2": 98,
+        "temp": 30.48,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 108,
+        "hr": 72,
+        "spo2": 98,
+        "temp": 30.6,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 109,
+        "hr": 75,
+        "spo2": 98,
+        "temp": 30.49,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 110,
+        "hr": 74,
+        "spo2": 98,
+        "temp": 30.37,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 111,
+        "hr": 70,
+        "spo2": 98,
+        "temp": 30.59,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 112,
+        "hr": 75,
+        "spo2": 98,
+        "temp": 30.62,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 113,
+        "hr": 70,
+        "spo2": 97,
+        "temp": 30.5,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 114,
+        "hr": 70,
+        "spo2": 97,
+        "temp": 30.42,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 115,
+        "hr": 72,
+        "spo2": 98.0,
+        "temp": 31.28,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 116,
+        "hr": 75,
+        "spo2": 97.7,
+        "temp": 31.0,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 117,
+        "hr": 73,
+        "spo2": 97.4,
+        "temp": 30.37,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 118,
+        "hr": 71,
+        "spo2": 97.1,
+        "temp": 30.91,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 119,
+        "hr": 74,
+        "spo2": 96.8,
+        "temp": 30.35,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 120,
+        "hr": 72.0,
+        "spo2": 96.5,
+        "temp": 31.23,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 121,
+        "hr": 73.5,
+        "spo2": 96.2,
+        "temp": 30.84,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 122,
+        "hr": 75.0,
+        "spo2": 95.9,
+        "temp": 29.76,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 123,
+        "hr": 76.5,
+        "spo2": 95.6,
+        "temp": 30.2,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 124,
+        "hr": 78.0,
+        "spo2": 95.3,
+        "temp": 31.09,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 125,
+        "hr": 79.5,
+        "spo2": 95.0,
+        "temp": 30.77,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 126,
+        "hr": 81.0,
+        "spo2": 95.2,
+        "temp": 29.94,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 127,
+        "hr": 82.5,
+        "spo2": 95.4,
+        "temp": 30.95,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 128,
+        "hr": 84.0,
+        "spo2": 95.6,
+        "temp": 30.95,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 129,
+        "hr": 85.5,
+        "spo2": 95.8,
+        "temp": 31.12,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 130,
+        "hr": 87.0,
+        "spo2": 96.0,
+        "temp": 30.52,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 131,
+        "hr": 86.2,
+        "spo2": 96.2,
+        "temp": 31.21,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 132,
+        "hr": 85.4,
+        "spo2": 96.4,
+        "temp": 30.89,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 133,
+        "hr": 84.6,
+        "spo2": 96.6,
+        "temp": 29.92,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 134,
+        "hr": 83.8,
+        "spo2": 96.8,
+        "temp": 30.8,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 135,
+        "hr": 83.0,
+        "spo2": 97.0,
+        "temp": 30.25,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 136,
+        "hr": 82.2,
+        "spo2": 97.2,
+        "temp": 31.2,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 137,
+        "hr": 81.4,
+        "spo2": 97.4,
+        "temp": 29.8,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 138,
+        "hr": 80.6,
+        "spo2": 97.6,
+        "temp": 31.15,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 139,
+        "hr": 79.8,
+        "spo2": 97.8,
+        "temp": 30.59,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 140,
+        "hr": 79.0,
+        "spo2": 98,
+        "temp": 30.69,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 141,
+        "hr": 78.2,
+        "spo2": 97,
+        "temp": 31.23,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 142,
+        "hr": 77.4,
+        "spo2": 98,
+        "temp": 30.91,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 143,
+        "hr": 76.6,
+        "spo2": 99,
+        "temp": 30.98,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 144,
+        "hr": 75.8,
+        "spo2": 98,
+        "temp": 30.88,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 145,
+        "hr": 74,
+        "spo2": 98,
+        "temp": 29.85,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 146,
+        "hr": 73,
+        "spo2": 98,
+        "temp": 30.59,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 147,
+        "hr": 73,
+        "spo2": 97,
+        "temp": 30.12,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 148,
+        "hr": 70,
+        "spo2": 98,
+        "temp": 29.84,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 149,
+        "hr": 71,
+        "spo2": 97,
+        "temp": 29.88,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 150,
+        "hr": 69,
+        "spo2": 98,
+        "temp": 30.74,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 151,
+        "hr": 69,
+        "spo2": 97,
+        "temp": null,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 152,
+        "hr": 72,
+        "spo2": 98,
+        "temp": 31.3,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 153,
+        "hr": 75,
+        "spo2": 97,
+        "temp": 30.79,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 154,
+        "hr": 74,
+        "spo2": 97,
+        "temp": 29.81,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 155,
+        "hr": 69,
+        "spo2": 98,
+        "temp": 30.23,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 156,
+        "hr": 69,
+        "spo2": 99,
+        "temp": 30.81,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 157,
+        "hr": 75,
+        "spo2": 98,
+        "temp": 30.07,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 158,
+        "hr": 71,
+        "spo2": 97,
+        "temp": 31.22,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 159,
+        "hr": 71,
+        "spo2": 98,
+        "temp": 29.7,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 160,
+        "hr": 71,
+        "spo2": 98,
+        "temp": 29.8,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 161,
+        "hr": 73,
+        "spo2": 99,
+        "temp": 29.92,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 162,
+        "hr": 69,
+        "spo2": 97,
+        "temp": 29.71,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 163,
+        "hr": 73,
+        "spo2": 97,
+        "temp": 31.11,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 164,
+        "hr": 75,
+        "spo2": 98,
+        "temp": 31.1,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 165,
+        "hr": 74,
+        "spo2": 99,
+        "temp": 30.3,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 166,
+        "hr": 70,
+        "spo2": 99,
+        "temp": 30.12,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 167,
+        "hr": 70,
+        "spo2": 97,
+        "temp": 29.86,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 168,
+        "hr": 69,
+        "spo2": 98,
+        "temp": 30.69,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 169,
+        "hr": 75,
+        "spo2": 98,
+        "temp": 31.16,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 170,
+        "hr": 70,
+        "spo2": 97,
+        "temp": 30.43,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 171,
+        "hr": 70,
+        "spo2": 98,
+        "temp": 30.56,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 172,
+        "hr": 69,
+        "spo2": 98,
+        "temp": 30.9,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 173,
+        "hr": 71,
+        "spo2": 97,
+        "temp": 30.69,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 174,
+        "hr": 72,
+        "spo2": 98,
+        "temp": 30.8,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 175,
+        "hr": 73,
+        "spo2": 98,
+        "temp": 31.04,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 176,
+        "hr": 70,
+        "spo2": 97,
+        "temp": 29.81,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 177,
+        "hr": 71,
+        "spo2": 99,
+        "temp": 30.73,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 178,
+        "hr": 71,
+        "spo2": 98,
+        "temp": 30.32,
+        "device_id": "prototype1"
+    },
+    {
+        "timestamp": 179,
+        "hr": 70,
+        "spo2": 97,
+        "temp": 30.79,
+        "device_id": "prototype1"
+    }
+]
