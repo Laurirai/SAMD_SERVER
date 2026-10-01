@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sleep Analysis</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            color: #222;
+        }
+
+        header {
+            background: #1f2937;
+            color: white;
+            padding: 20px 40px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+
+        main {
+            max-width: 1400px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .card h2 {
+            margin-top: 0;
+        }
+
+        .main-graph {
+            height: 400px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+        }
+
+        .small-graphs {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .small-graph {
+            height: 250px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .stat {
+            background: #f4f6f8;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .stat-title {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Sleep Analysis Page</h1>
+</header>
+
+<main>
+
+    <section class="card">
+        <h2>Overall Session</h2>
+
+        <div class="main-graph">
+            Overall session graph will go here
+        </div>
+    </section>
+
+
+    <section class="small-graphs">
+
+        <div class="card">
+            <h2>Heart Rate</h2>
+            <div class="small-graph">
+                HR graph
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>SpO₂</h2>
+            <div class="small-graph">
+                SpO₂ graph
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>NTC Temperature</h2>
+            <div class="small-graph">
+                Temperature graph
+            </div>
+        </div>
+
+    </section>
+
+
+    <section class="card">
+        <h2>Sleep Quality</h2>
+
+        <div class="small-graph">
+            Sleep quality graph
+        </div>
+    </section>
+
+
+    <section class="card">
+        <h2>Session Statistics</h2>
+
+        <div class="stats">
+
+            <div class="stat">
+                <div class="stat-title">Session Duration</div>
+                <div class="stat-value">--</div>
+            </div>
+
+            <div class="stat">
+                <div class="stat-title">Average HR</div>
+                <div class="stat-value">--</div>
+            </div>
+
+            <div class="stat">
+                <div class="stat-title">Average SpO₂</div>
+                <div class="stat-value">--</div>
+            </div>
+
+            <div class="stat">
+                <div class="stat-title">Detected Events</div>
+                <div class="stat-value">--</div>
+            </div>
+
+        </div>
+    </section>
+
+</main>
+
+</body>
+</html>
