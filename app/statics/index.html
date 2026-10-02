@@ -60,12 +60,18 @@
 
         .small-graph {
             height: 250px;
+            position: relative;
             border: 1px solid #ddd;
             border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #888;
+        }
+
+        .small-graph canvas {
+            width: 100% !important;
+            height: 100% !important;
         }
 
         .stats {
@@ -117,21 +123,21 @@
         <div class="card">
             <h2>Heart Rate</h2>
             <div class="small-graph">
-                HR graph
+                <canvas id="hrChart"></canvas>
             </div>
         </div>
 
         <div class="card">
             <h2>SpO₂</h2>
             <div class="small-graph">
-                SpO₂ graph
+                <canvas id="spo2Chart"></canvas>
             </div>
         </div>
 
         <div class="card">
             <h2>NTC Temperature</h2>
             <div class="small-graph">
-                Temperature graph
+                <canvas id="tempChart"></canvas>
             </div>
         </div>
 
@@ -269,6 +275,79 @@ async function loadSession() {
             }
         );
 
+        function createSensorChart(canvasId, label, yAxisLabel, color, yMin = undefined, yMax = undefined) {
+            return new Chart(document.getElementById(canvasId), {
+                type: "line",
+                data: {
+                    datasets: [{
+                        label: label,
+                        data: [],
+                        parsing: false,
+                        borderColor: color,
+                        borderWidth: 2,
+                        pointRadius: 0,
+                        fill: false,
+                        tension: 0.2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation: false,
+                    interaction: {
+                        intersect: false,
+                        mode: "index"
+                    },
+                    scales: {
+                        x: {
+                            type: "linear",
+                            min: 0,
+                            max: 30,
+                            title: {
+                                display: true,
+                                text: "Time (seconds)"
+                            }
+                        },
+                        y: {
+                            min: yMin,
+                            max: yMax,
+                            title: {
+                                display: true,
+                                text: yAxisLabel
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        const hrChart = createSensorChart(
+            "hrChart",
+            "Heart Rate",
+            "Heart Rate (BPM)",
+            "#e05252"
+        );
+
+        const spo2Chart = createSensorChart(
+            "spo2Chart",
+            "SpO₂",
+            "SpO₂ (%)",
+            "#24a184",
+            80,
+            100
+        );
+
+        const tempChart = createSensorChart(
+            "tempChart",
+            "NTC Temperature",
+            "Temperature (°C)",
+            "#e5a13d"
+        );
+
+        const charts = [chart, hrChart, spo2Chart, tempChart];
+        const hrPoints = [];
+        const spo2Points = [];
+        const tempPoints = [];
 
         // Process one reading
 
@@ -298,6 +377,27 @@ async function loadSession() {
                 lastTemp = reading.temp;
             }
 
+            if (lastHR !== null) {
+                hrPoints.push({
+                    x: reading.timestamp,
+                    y: lastHR
+                });
+            }
+
+            if (lastSpO2 !== null) {
+                spo2Points.push({
+                    x: reading.timestamp,
+                    y: lastSpO2
+                });
+            }
+
+            if (lastTemp !== null) {
+                tempPoints.push({
+                    x: reading.timestamp,
+                    y: lastTemp
+                });
+            }
+
             // We need all three signals before creating
             // the overall status value.
             if (
@@ -309,7 +409,7 @@ async function loadSession() {
             }
 
             // Temporary demo scoring
-
+            // will definitely be replaced with a real scoring algorithm later
 
             const spo2Score = Math.max(
                 0,
@@ -356,25 +456,19 @@ async function loadSession() {
 
 
         function updateXAxis(timestamp) {
+            const interval = 30;
 
-            // Expand in 30-second increments.
-            //
-            // 0-30
-            // 0-60
-            // 0-90
-            // 0-120
-            // etc.
+            const newMax = Math.max(
+                interval,
+                Math.ceil((timestamp + 1) / interval) * interval
+            );
 
-            const newMax =
-                Math.max(
-                    30,
-                    Math.ceil((timestamp + 1) / 30) * 30
-                );
-
-            chart.options.scales.x.max = newMax;
-
-            chart.update("none");
+            for (const currentChart of charts) {
+                currentChart.options.scales.x.max = newMax;
+                currentChart.update("none");
+            }
         }
+
 
         // Play the test session
 
@@ -394,8 +488,10 @@ async function loadSession() {
 
             processReading(reading);
 
-            // Update graph
             chart.data.datasets[0].data = points;
+            hrChart.data.datasets[0].data = hrPoints;
+            spo2Chart.data.datasets[0].data = spo2Points;
+            tempChart.data.datasets[0].data = tempPoints;
 
             updateXAxis(reading.timestamp);
 
