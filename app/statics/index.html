@@ -96,6 +96,57 @@
             font-weight: bold;
             margin-top: 5px;
         }
+
+        .command-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .device-online-box {
+            width: 18px;
+            height: 18px;
+        }
+
+        .command-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .command-buttons button {
+            border: 0;
+            border-radius: 6px;
+            padding: 10px 22px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        #startButton {
+            background: #198754;
+            color: white;
+        }
+
+        #pauseButton {
+            background: #f0ad4e;
+            color: #222;
+        }
+
+        #finishButton {
+            background: #dc3545;
+            color: white;
+        }
+
+        @media (max-width: 900px) {
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .small-graphs {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -145,39 +196,62 @@
 
 
     <section class="card">
-        <h2>Sleep Quality</h2>
-
-        <div class="small-graph">
-            Sleep quality graph
-        </div>
-    </section>
-
-
-    <section class="card">
         <h2>Session Statistics</h2>
 
         <div class="stats">
-
             <div class="stat">
                 <div class="stat-title">Session Duration</div>
-                <div class="stat-value">--</div>
+                <div class="stat-value" id="statDuration">0 s</div>
             </div>
-
             <div class="stat">
                 <div class="stat-title">Average HR</div>
-                <div class="stat-value">--</div>
+                <div class="stat-value" id="statHrAverage">--</div>
             </div>
-
+            <div class="stat">
+                <div class="stat-title">Minimum HR</div>
+                <div class="stat-value" id="statHrMinimum">--</div>
+            </div>
+            <div class="stat">
+                <div class="stat-title">Maximum HR</div>
+                <div class="stat-value" id="statHrMaximum">--</div>
+            </div>
             <div class="stat">
                 <div class="stat-title">Average SpO₂</div>
-                <div class="stat-value">--</div>
+                <div class="stat-value" id="statSpo2Average">--</div>
             </div>
-
+            <div class="stat">
+                <div class="stat-title">Minimum SpO₂</div>
+                <div class="stat-value" id="statSpo2Minimum">--</div>
+            </div>
+            <div class="stat">
+                <div class="stat-title">Average Temperature</div>
+                <div class="stat-value" id="statTempAverage">--</div>
+            </div>
+            <div class="stat">
+                <div class="stat-title">Minimum Temperature</div>
+                <div class="stat-value" id="statTempMinimum">--</div>
+            </div>
+            <div class="stat">
+                <div class="stat-title">Maximum Temperature</div>
+                <div class="stat-value" id="statTempMaximum">--</div>
+            </div>
             <div class="stat">
                 <div class="stat-title">Detected Events</div>
                 <div class="stat-value">--</div>
             </div>
+        </div>
+    </section>
 
+    <section class="card">
+        <h2>Command Center</h2>
+        <div class="command-status">
+            <input class="device-online-box" id="deviceOnline" type="checkbox" disabled>
+            <label for="deviceOnline">Device online</label>
+        </div>
+        <div class="command-buttons">
+            <button id="startButton" type="button">Start</button>
+            <button id="pauseButton" type="button">Pause</button>
+            <button id="finishButton" type="button">Finish</button>
         </div>
     </section>
 
@@ -470,41 +544,78 @@ async function loadSession() {
         }
 
 
-        // Play the test session
-
-
+        const validHR = [];
+        const validSpO2 = [];
+        const validTemp = [];
         let index = 0;
+        let sessionFinished = false;
+
+        function updateStatistic(id, values, unit, digits = 0) {
+            const element = document.getElementById(id);
+
+            if (values.length === 0) {
+                element.textContent = "--";
+                return;
+            }
+
+            const average = values.reduce((sum, value) => sum + value, 0) / values.length;
+            const statistic = id.includes("Average")
+                ? average
+                : id.includes("Minimum")
+                    ? Math.min(...values)
+                    : Math.max(...values);
+
+            element.textContent = `${statistic.toFixed(digits)} ${unit}`;
+        }
+
+        function updateStatistics(reading) {
+            if (Number.isFinite(reading.hr) && reading.hr > 0) {
+                validHR.push(reading.hr);
+            }
+            if (Number.isFinite(reading.spo2) && reading.spo2 > 0 && reading.spo2 <= 100) {
+                validSpO2.push(reading.spo2);
+            }
+            if (Number.isFinite(reading.temp) && reading.temp > 0) {
+                validTemp.push(reading.temp);
+            }
+
+            document.getElementById("statDuration").textContent = `${reading.timestamp} s`;
+            updateStatistic("statHrAverage", validHR, "BPM");
+            updateStatistic("statHrMinimum", validHR, "BPM");
+            updateStatistic("statHrMaximum", validHR, "BPM");
+            updateStatistic("statSpo2Average", validSpO2, "%", 1);
+            updateStatistic("statSpo2Minimum", validSpO2, "%", 1);
+            updateStatistic("statTempAverage", validTemp, "°C", 2);
+            updateStatistic("statTempMinimum", validTemp, "°C", 2);
+            updateStatistic("statTempMaximum", validTemp, "°C", 2);
+        }
 
         function showNextReading() {
+            if (sessionFinished) {
+                return;
+            }
 
             if (index >= readings.length) {
-                status.textContent =
-                    `Session complete — ${readings.length} samples processed.`;
-
+                sessionFinished = true;
+                status.textContent = `Session ended — ${index} samples processed.`;
                 return;
             }
 
             const reading = readings[index];
-
             processReading(reading);
+            updateStatistics(reading);
 
             chart.data.datasets[0].data = points;
             hrChart.data.datasets[0].data = hrPoints;
             spo2Chart.data.datasets[0].data = spo2Points;
             tempChart.data.datasets[0].data = tempPoints;
-
             updateXAxis(reading.timestamp);
 
-            status.textContent =
-                `Live session: ${reading.timestamp} seconds`;
-
+            status.textContent = `Live session: ${reading.timestamp} seconds`;
             index++;
-
-            // One simulated sensor reading per second
             setTimeout(showNextReading, 1000);
         }
 
-        // Start the simulated session
         showNextReading();
 
     } catch (error) {
