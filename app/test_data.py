@@ -12,9 +12,7 @@ def generate_test_data():
 
     for timestamp in range(SESSION_LENGTH):
 
-        # -------------------------
         # Normal baseline
-        # -------------------------
         hr = 72 + random.randint(-3, 3)
         spo2 = 98 + random.choice([-1, 0, 0, 0, 1])
 
@@ -22,30 +20,24 @@ def generate_test_data():
         # temperature moves up and down noticeably
         temp = 30.5 + random.uniform(-0.8, 0.8)
 
-        # -------------------------
         # Possible apnea
-        # -------------------------
         if APNEA_START <= timestamp < APNEA_END:
             # Much less temperature variation
             temp = 30.5 + random.uniform(-0.15, 0.15)
 
-        # -------------------------
         # SpO2 starts reacting
-        # -------------------------
         if 115 <= timestamp < 125:
             drop = (timestamp - 115) * 0.3
             spo2 = 98 - drop
 
-        # -------------------------
         # HR starts rising
-        # -------------------------
         if 120 <= timestamp < 130:
             rise = (timestamp - 120) * 1.5
             hr = 72 + rise
 
-        # -------------------------
+
         # Recovery
-        # -------------------------
+
         if 125 <= timestamp < 140:
             recovery = (timestamp - 125) * 0.2
             spo2 = 95 + recovery
@@ -54,10 +46,10 @@ def generate_test_data():
             recovery = (timestamp - 130) * 0.8
             hr = 87 - recovery
 
-        # -------------------------
+
         # Simulate occasional
         # invalid sensor readings
-        # -------------------------
+
         if timestamp == 47:
             hr = None
 
@@ -67,9 +59,7 @@ def generate_test_data():
         if timestamp == 151:
             temp = None
 
-        # -------------------------
         # Create device-style packet
-        # -------------------------
         packet = {
             "timestamp": timestamp,
             "hr": round(hr, 1) if hr is not None else None,
