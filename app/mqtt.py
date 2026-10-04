@@ -1,32 +1,44 @@
 import json
+
 import paho.mqtt.client as mqtt
-from analysis import Analyzer
+from app.state import session
+from app.analysis import Analyzer
 
 
 BROKER = "localhost"
 PORT = 1883
-TOPIC = "sleep/data"
+DATA_TOPIC = "sleep/data"
+STATUS_TOPIC = "sleep/status"
 
 analyzer = Analyzer()
 
+
 def on_connect(client, userdata, flags, reason_code, properties):
     print(f"Connected to MQTT broker with result: {reason_code}")
-    client.subscribe(TOPIC)
-    print(f"Subscribed to: {TOPIC}")
+
+    client.subscribe(DATA_TOPIC)
+    client.subscribe(STATUS_TOPIC)
+
+    print(f"Subscribed to: {DATA_TOPIC}")
+    print(f"Subscribed to: {STATUS_TOPIC}")
 
 
 def on_message(client, userdata, message):
     try:
-        data = json.loads(message.payload.decode())
-        print(f"Received: {data}")
+        data = json.loads(message.payload.decode("utf-8"))
+    except (json.JSONDecodeError, UnicodeDecodeError):
+        print(f"Received invalid JSON or text on topic: {message.topic}")
+        return
 
-        event = analyzer.process(data)
-
+    if message.topic == DATA_TOPIC:
+        reading = session.add_reading(data)
+        event = analyzer.process(reading)
         if event:
             print(f"Event: {event}")
 
-    except json.JSONDecodeError:
-        print("Received invalid JSON")
+    elif message.topic == STATUS_TOPIC:
+        print(f"Received device status: {data}")
+        session.set_status(data)
 
 
 def start_mqtt():
@@ -36,7 +48,6 @@ def start_mqtt():
     client.on_message = on_message
 
     client.connect(BROKER, PORT)
-
     client.loop_start()
 
     return client
