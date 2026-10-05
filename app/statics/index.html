@@ -257,7 +257,7 @@
             </div>
             <div class="stat">
                 <div class="stat-title">Detected Sleep Apnea Events</div>
-                <div class="stat-value">--</div>
+                <div class="stat-value" id="statApnea">--</div>
             </div>
         </div>
     </section>
@@ -320,7 +320,8 @@ function updateStatus(s) {
 const STAT_IDS = [
     "statDuration", "statHrAverage", "statHrMinimum", "statHrMaximum",
     "statSpo2Average", "statSpo2Minimum",
-    "statTempAverage", "statTempMinimum", "statTempMaximum", "statMouthBreathing"
+    "statTempAverage", "statTempMinimum", "statTempMaximum",
+    "statMouthBreathing", "statNightmare", "statApnea"
 ];
 
 function updateStats(stats) {
@@ -339,6 +340,7 @@ function updateStats(stats) {
     setStat("statTempMaximum", stats.temp?.max, " °C", 2);
     setStat("statMouthBreathing", stats.mouth_breathing_s, " s");
     setStat("statNightmare", stats.nightmare_events);
+    setStat("statApnea", stats.apnea_events);
 }
 
 async function poll() {

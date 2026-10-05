@@ -1,0 +1,28 @@
+{
+  "session": 3,
+  "saved_at": "2026-10-05T05:13:12",
+  "stats": {
+    "duration": 119,
+    "hr": {
+      "avg": 72.55,
+      "min": 60,
+      "max": 100
+    },
+    "spo2": {
+      "avg": 96.725,
+      "min": 88,
+      "max": 99
+    },
+    "temp": {
+      "avg": 32.18591666666667,
+      "min": 26.04,
+      "max": 33.49
+    },
+    "mouth_breathing_s": 15,
+    "nightmare_events": 2,
+    "nightmare_time_stamp": [
+      46,
+      80
+    ]
+  }
+}

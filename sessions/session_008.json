@@ -1,0 +1,35 @@
+{
+  "session": 8,
+  "saved_at": "2026-10-06T01:11:43",
+  "stats": {
+    "duration": 629,
+    "hr": {
+      "avg": 68.9920634920635,
+      "min": 62,
+      "max": 97
+    },
+    "spo2": {
+      "avg": 96.96984126984127,
+      "min": 85,
+      "max": 99
+    },
+    "temp": {
+      "avg": 29.174380952380965,
+      "min": 26.01,
+      "max": 33.5
+    },
+    "mouth_breathing_s": 280,
+    "nightmare_events": 0,
+    "nightmare_time_stamp": [],
+    "apnea_events": 1,
+    "apnea_time_stamp": [
+      160
+    ],
+    "apnea_lowest_spo2": [
+      85
+    ],
+    "apnea_hr_rise": [
+      true
+    ]
+  }
+}

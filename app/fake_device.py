@@ -7,87 +7,74 @@ import paho.mqtt.client as mqtt
 BROKER = "localhost"
 PORT = 1883
 DEVICE_ID = "prototype1"
-DURATION = 120    # samples of data (one per second)
-PAUSE_AT = 15    # pause just before this sample is sent
-PAUSE_LENGTH = 5  # seconds
+DELAY = 0.05  # seconds between samples; the server counts samples, so this is safe. Use 1 for real time.
+PAUSE_SECONDS = 5  # real seconds the device stays paused
+
+# Normal ranges (low, high)
+NORMAL = {"hr": (62, 74), "spo2": (96, 99), "temp": (32.5, 33.5)}
+LOW_TEMP = (26.0, 27.0)
+
+PAUSE = "pause"  # marker for a pause in the scenario
+
+# (name, seconds, overrides): overrides replace the normal range for the whole segment
+SCENARIO = [
+    ("calm, baselines settle",    60, {}),
+    ("mouth breathing only (1)",  20, {"temp": LOW_TEMP}),
+    ("session pause",              0, PAUSE),
+    ("mouth breathing only (2)",  20, {"temp": LOW_TEMP}),
+    ("calm",                      60, {}),
+    ("apnea: low airflow",        65, {"temp": LOW_TEMP}),
+    ("apnea: desaturation",       25, {"temp": LOW_TEMP, "spo2": (85, 89)}),
+    ("apnea: recovery",           20, {"spo2": (90, 94), "hr": (88, 98)}),
+    ("calm",                      60, {}),
+    ("long mouth breathing",     240, {"temp": LOW_TEMP}),
+    ("calm",                      60, {}),
+]
 
 
-def publish_json(client, topic, payload):
-    client.publish(topic, json.dumps(payload))
+def sample(overrides):
+    values = {}
+    for key, normal in NORMAL.items():
+        low, high = overrides.get(key, normal)
+        value = random.uniform(low, high)
+        values[key] = round(value, 2) if key == "temp" else round(value)
+    return values
 
 
 client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
 client.connect(BROKER, PORT)
 client.loop_start()
 
-# Device boots, becomes ready, then a session starts
-publish_json(client, "sleep/status", {"device_id": DEVICE_ID, "state": "init", "timestamp": 0})
+
+def status(state, timestamp):
+    client.publish("sleep/status", json.dumps(
+        {"device_id": DEVICE_ID, "state": state, "timestamp": timestamp}))
+
+
+status("init", 0)
 time.sleep(1)
-publish_json(client, "sleep/status", {"device_id": DEVICE_ID, "state": "ready", "timestamp": 1000})
+status("ready", 1000)
 time.sleep(2)
-publish_json(client, "sleep/status", {"device_id": DEVICE_ID, "state": "session", "timestamp": 3000})
+status("session", 3000)
 
-device_time = 3000  # fake device clock in ms; keeps running during the pause
+device_time = 3000
+for name, seconds, overrides in SCENARIO:
+    if overrides == PAUSE:
+        print(f"--- {name}: paused for {PAUSE_SECONDS} s")
+        status("pause", device_time)
+        time.sleep(PAUSE_SECONDS)
+        device_time += PAUSE_SECONDS * 1000  # the device clock keeps running
+        status("session", device_time)
+        continue
 
-for i in range(DURATION):
-    # Pause, send no data, then resume
-    if i == PAUSE_AT:
-        publish_json(client, "sleep/status", {"device_id": DEVICE_ID, "state": "pause", "timestamp": device_time})
-        print("paused")
-        time.sleep(PAUSE_LENGTH)
-        device_time += PAUSE_LENGTH * 1000
-        publish_json(client, "sleep/status", {"device_id": DEVICE_ID, "state": "session", "timestamp": device_time})
-        print("resumed")
+    print(f"--- {name} ({seconds} samples)")
+    for _ in range(seconds):
+        payload = {"timestamp": device_time, **sample(overrides), "device_id": DEVICE_ID}
+        client.publish("sleep/data", json.dumps(payload))
+        device_time += 1000
+        time.sleep(DELAY)
 
-    hr = random.randint(60, 75)
-    spo2 = random.randint(96, 99)
-    temp = round(random.uniform(32.5, 33.5), 2)
-
-    #if mess to test out every single scenario
-
-    # A visible SpO2 dip between 25 s and 35 s, so the graph has some shape
-    if 25 <= i < 35:
-        spo2 = random.randint(88, 92)
-    
-    if 30 <= i < 45:
-        temp = round(random.uniform(26.0, 27.0), 2)
-
-    # Bad readings to test the "use previous value" logic
-    if i == 10:
-        hr = None
-    if i == 20:
-        spo2 = 0
-    if i == 40:
-        temp = None
-    # Short spike (shorter than 5 s, should be ignored) and a sustained one (should count once)
-    if 36 <= i < 39:
-        hr = random.randint(90, 100)
-    if 46 <= i < 56:
-        hr = random.randint(90, 100)
-
-    if 80 <= i < 90:
-        hr = random.randint(90, 100)
-
-    publish_json(client, "sleep/data", {
-        "timestamp": device_time,
-        "hr": hr,
-        "spo2": spo2,
-        "temp": temp,
-        "device_id": DEVICE_ID,
-    })
-
-    # Sensor error late in the session
-    if i == 45:
-        publish_json(client, "sleep/status", {
-            "device_id": DEVICE_ID, "state": "error",
-            "detail": "ntc,pulse", "timestamp": device_time,
-        })
-
-    print(f"sent sample {i}")
-    time.sleep(1)
-    device_time += 1000
-
-publish_json(client, "sleep/status", {"device_id": DEVICE_ID, "state": "stop", "timestamp": device_time})
+status("stop", device_time)
 time.sleep(0.5)  # give paho a moment to flush the last message
 client.loop_stop()
 client.disconnect()
