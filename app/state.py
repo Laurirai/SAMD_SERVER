@@ -22,6 +22,7 @@ class SessionState:
         self.reset_timer = None
 
         # Set from mqtt.py so this file doesn't need to import the analyzer
+        self.analyze = lambda reading: None
         self.get_events = lambda: []
         self.get_summary = lambda: {}
         self.on_reset = lambda: None
@@ -112,6 +113,8 @@ class SessionState:
                 "spo2": spo2,
                 "temp": temp,
             }
+            # Analyze before the reading becomes visible, so it always has its score
+            reading["score"] = self.analyze(reading)
             self.readings.append(reading)
             return {**reading, "timestamp": data["timestamp"]}
 

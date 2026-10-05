@@ -7,7 +7,7 @@ import paho.mqtt.client as mqtt
 BROKER = "localhost"
 PORT = 1883
 DEVICE_ID = "prototype1"
-DURATION = 60    # samples of data (one per second)
+DURATION = 120    # samples of data (one per second)
 PAUSE_AT = 15    # pause just before this sample is sent
 PAUSE_LENGTH = 5  # seconds
 
@@ -43,6 +43,8 @@ for i in range(DURATION):
     spo2 = random.randint(96, 99)
     temp = round(random.uniform(32.5, 33.5), 2)
 
+    #if mess to test out every single scenario
+
     # A visible SpO2 dip between 25 s and 35 s, so the graph has some shape
     if 25 <= i < 35:
         spo2 = random.randint(88, 92)
@@ -57,6 +59,14 @@ for i in range(DURATION):
         spo2 = 0
     if i == 40:
         temp = None
+    # Short spike (shorter than 5 s, should be ignored) and a sustained one (should count once)
+    if 36 <= i < 39:
+        hr = random.randint(90, 100)
+    if 46 <= i < 56:
+        hr = random.randint(90, 100)
+
+    if 80 <= i < 90:
+        hr = random.randint(90, 100)
 
     publish_json(client, "sleep/data", {
         "timestamp": device_time,

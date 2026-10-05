@@ -253,7 +253,7 @@
             </div>
             <div class="stat">
                 <div class="stat-title">Nightmare Events</div>
-                <div class="stat-value">--</div>
+                <div class="stat-value" id="statNightmare">--</div>
             </div>
             <div class="stat">
                 <div class="stat-title">Detected Sleep Apnea Events</div>
@@ -300,6 +300,7 @@ const charts = [overallChart, ...sensorCharts];
 let sessionId = null;
 let received = 0;
 let sensorData = [[], [], []];
+let overallData = [];
 
 function setStat(id, value, unit = "", digits = 0) {
     $(id).textContent = (value === null || value === undefined)
@@ -336,7 +337,8 @@ function updateStats(stats) {
     setStat("statTempAverage", stats.temp?.avg, " °C", 2);
     setStat("statTempMinimum", stats.temp?.min, " °C", 2);
     setStat("statTempMaximum", stats.temp?.max, " °C", 2);
-    setStat("statMouthBreathing", stats.mouth_breathing_s, " s"); //not working
+    setStat("statMouthBreathing", stats.mouth_breathing_s, " s");
+    setStat("statNightmare", stats.nightmare_events);
 }
 
 async function poll() {
@@ -352,18 +354,23 @@ async function poll() {
         if (s.session_id !== sessionId) {
             sessionId = s.session_id;
             sensorData = [[], [], []];
+            overallData = [];
         }
 
         for (const r of s.readings) {
             if (r.hr !== null) sensorData[0].push({ x: r.t, y: r.hr });
             if (r.spo2 !== null) sensorData[1].push({ x: r.t, y: r.spo2 });
             if (r.temp !== null) sensorData[2].push({ x: r.t, y: r.temp });
+            if (r.score !== null && r.score !== undefined) overallData.push({ x: r.t, y: r.score });
         }
         received = s.total;
 
         sensorCharts.forEach((chart, i) => {
             chart.data.datasets[0].data = sensorData[i];
+
         });
+
+        overallChart.data.datasets[0].data = overallData;
 
         const lastT = s.stats ? s.stats.duration : 0;
         const axisMax = Math.max(30, Math.ceil((lastT + 1) / 30) * 30);

@@ -14,6 +14,7 @@ analyzer = Analyzer()
 session.get_events = analyzer.get_events
 session.on_reset = analyzer.reset
 session.get_summary = analyzer.get_summary
+session.analyze = analyzer.process
 
 def on_connect(client, userdata, flags, reason_code, properties):
     print(f"Connected to MQTT broker with result: {reason_code}")
@@ -33,10 +34,7 @@ def on_message(client, userdata, message):
         return
 
     if message.topic == DATA_TOPIC:
-        reading = session.add_reading(data)
-        event = analyzer.process(reading)
-        if event:
-            print(f"Event: {event}")
+        session.add_reading(data)
 
     elif message.topic == STATUS_TOPIC:
         print(f"Received device status: {data}")
