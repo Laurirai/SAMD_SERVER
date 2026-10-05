@@ -249,7 +249,7 @@
             </div>
             <div class="stat">
                 <div class="stat-title">Mouth Breathing Amount</div>
-                <div class="stat-value">--</div>
+                <div class="stat-value" id="statMouthBreathing">--</div>
             </div>
             <div class="stat">
                 <div class="stat-title">Nightmare Events</div>
@@ -316,8 +316,17 @@ function updateStatus(s) {
     $("deviceError").textContent = s.error ? `Sensor error: ${s.error}` : "";
 }
 
+const STAT_IDS = [
+    "statDuration", "statHrAverage", "statHrMinimum", "statHrMaximum",
+    "statSpo2Average", "statSpo2Minimum",
+    "statTempAverage", "statTempMinimum", "statTempMaximum", "statMouthBreathing"
+];
+
 function updateStats(stats) {
-    if (!stats) return;
+    if (!stats) {
+        STAT_IDS.forEach(id => $(id).textContent = "--");
+        return;
+    }
     setStat("statDuration", stats.duration, " s");
     setStat("statHrAverage", stats.hr?.avg, " BPM", 1);
     setStat("statHrMinimum", stats.hr?.min, " BPM");
@@ -327,6 +336,7 @@ function updateStats(stats) {
     setStat("statTempAverage", stats.temp?.avg, " °C", 2);
     setStat("statTempMinimum", stats.temp?.min, " °C", 2);
     setStat("statTempMaximum", stats.temp?.max, " °C", 2);
+    setStat("statMouthBreathing", stats.mouth_breathing_s, " s"); //not working
 }
 
 async function poll() {

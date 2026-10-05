@@ -1,53 +1,52 @@
 from collections import deque
 
+# --- Tuning constants: adjust after testing with the real device ---
+BASELINE_SIZE = 10   # samples in the temperature baseline
+MB_DROP = 5.0        # °C below baseline that starts mouth breathing
+MB_RECOVER = 2.0     # back within this many °C of baseline ends it
+
 
 class Analyzer:
-    def __init__(self, window_size=10):
-        self.window_size = window_size
+    def __init__(self):
+        self.reset()
 
-        # Recent measurements used for analysis
-        self.temperature_history = deque(maxlen=window_size)
-        self.spo2_history = deque(maxlen=window_size)
-        self.hr_history = deque(maxlen=window_size)
-        
-        self.added_temp = 0
-        self.added_spo2 = 0
-        self.added_hr = 0
-
-
-        # Detected events during the test
+    def reset(self):
+        """Clear everything so the next session starts clean."""
+        self.temp_baseline = deque(maxlen=BASELINE_SIZE)
+        self.mouth_breathing = False
+        self.mouth_breathing_seconds = 0
         self.events = []
 
-        # Used to keep track of an ongoing possible apnea
-        self.apnea_active = False
-        self.apnea_start_time = None
-
     def process(self, data):
-        """
-        Process one sensor measurement.
-
-        Returns an event if something noteworthy happens,
-        otherwise returns None.
-        """
-
-        # Store the new measurement
-        self.temperature_history.append(data["temp"])
-        self.spo2_history.append(data["spo2"])
-        self.hr_history.append(data["hr"])
-
-        if len(self.temperature_history) < self.window_size:
+        """Process one sample (one per second)."""
+        temp = data.get("temp")
+        if temp is None:  # only before the first valid reading
             return None
 
-        avg_temp = sum(self.temperature_history) / len(self.temperature_history)
+        # Fill the baseline first, no detection until it is full
+        if len(self.temp_baseline) < BASELINE_SIZE:
+            self.temp_baseline.append(temp)
+            return None
 
-        print(f"Average Temp: {avg_temp}")
+        baseline = sum(self.temp_baseline) / len(self.temp_baseline)
+        drop = baseline - temp
 
-        temp_range = max(self.temperature_history) - min(self.temperature_history)
+        if self.mouth_breathing:
+            if drop < MB_RECOVER:
+                self.mouth_breathing = False
+        elif drop >= MB_DROP:
+            self.mouth_breathing = True
 
-        print(f"Temperature range: {temp_range:.2f} C")
+        if self.mouth_breathing:
+            self.mouth_breathing_seconds += 1  # one sample = one second
+        else:
+            self.temp_baseline.append(temp)  # only normal samples update the baseline
 
         return None
 
+    def get_summary(self):
+        """Results that get merged into the session stats."""
+        return {"mouth_breathing_s": self.mouth_breathing_seconds}
+
     def get_events(self):
-        """Return all events detected during the test."""
         return self.events

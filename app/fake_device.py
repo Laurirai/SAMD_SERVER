@@ -46,6 +46,9 @@ for i in range(DURATION):
     # A visible SpO2 dip between 25 s and 35 s, so the graph has some shape
     if 25 <= i < 35:
         spo2 = random.randint(88, 92)
+    
+    if 30 <= i < 45:
+        temp = round(random.uniform(26.0, 27.0), 2)
 
     # Bad readings to test the "use previous value" logic
     if i == 10:

@@ -11,7 +11,9 @@ DATA_TOPIC = "sleep/data"
 STATUS_TOPIC = "sleep/status"
 
 analyzer = Analyzer()
-
+session.get_events = analyzer.get_events
+session.on_reset = analyzer.reset
+session.get_summary = analyzer.get_summary
 
 def on_connect(client, userdata, flags, reason_code, properties):
     print(f"Connected to MQTT broker with result: {reason_code}")
