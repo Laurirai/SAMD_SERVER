@@ -1,4 +1,5 @@
 import json
+import ssl
 
 import paho.mqtt.client as mqtt
 from app.state import session
@@ -6,7 +7,7 @@ from app.analysis import Analyzer
 
 
 BROKER = "localhost"
-PORT = 1883
+PORT = 8883
 DATA_TOPIC = "sleep/data"
 STATUS_TOPIC = "sleep/status"
 
@@ -20,6 +21,7 @@ def on_connect(client, userdata, flags, reason_code, properties):
     print(f"Connected to MQTT broker with result: {reason_code}")
 
     client.subscribe(DATA_TOPIC)
+
     client.subscribe(STATUS_TOPIC)
 
     print(f"Subscribed to: {DATA_TOPIC}")
@@ -43,7 +45,10 @@ def on_message(client, userdata, message):
 
 def start_mqtt():
     client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
-
+    client.tls_set("/etc/mosquitto/certs/ca.crt", tls_version=ssl.PROTOCOL_TLSv1_2)
+    client.tls_insecure_set(True)
+    client.username = "server"
+    client.password = "nope"
     client.on_connect = on_connect
     client.on_message = on_message
 
